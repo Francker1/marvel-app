@@ -1,0 +1,39 @@
+.header {
+  background-color: var(--blackColor);
+  color: var(--whiteColor);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 52px;
+}
+
+.header-content a {
+  display: flex;
+  align-items: center;
+  height: 52px;
+}
+
+.favorites-icon {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  cursor: pointer;
+}
+
+.favorites-icon img {
+  height: 24px;
+}
+
+.favorites-count{
+  margin-left: 8px;
+}

@@ -1,34 +1,32 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import CharacterDetailPage from './pages/CharacterDetailPage';
 
 function App() {
-  const [count, setCount] = useState(0);
+
+  const [characters, setCharacters] = useState([]);
+
+  // useEffect(() => {
+
+  //   fetch('https://gateway.marvel.com/v1/public/characters?ts=1&apikey=a14d594f1d265d357ea7a3dede1d58cc&hash=c7b09862a15c17dfaa1e85e796b205fa&limit=50')
+  //     .then(async res => await res.json())
+  //     .then(res => {
+  //       setCharacters(res.data.results)
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     })
+  // }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/character/:id" element={<CharacterDetailPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 

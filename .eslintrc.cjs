@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:react/recommended',
@@ -10,6 +14,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",
   },
