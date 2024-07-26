@@ -1,5 +1,4 @@
-import Header from "../components/Header"
-
+import Header from '../components/Header';
 
 const CharacterDetailPage = () => {
   return (
@@ -7,7 +6,7 @@ const CharacterDetailPage = () => {
       <Header />
       <h1>Character Detail</h1>
     </>
-  )
-}
+  );
+};
 
-export default CharacterDetailPage
+export default CharacterDetailPage;

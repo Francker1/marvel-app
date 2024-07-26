@@ -5,7 +5,6 @@ import MarvelLogo from '../assets/Marvel-logo.svg';
 import HeartIconFilled from '../assets/Heart-icon-filled.svg';
 
 const Header: React.FC = () => {
-
   return (
     <header className="header">
       <div className="header-content">
