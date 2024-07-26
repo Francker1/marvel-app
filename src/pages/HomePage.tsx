@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import "./home-style.css";
 import charactersData from '../data/characters.json';
 import CharacterCard from '../components/CharacterCard';
+//import { type Character } from '../types';
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,7 @@ const HomePage = () => {
   }, []);
 
   const fetchCharacters = async () => {
-    // Simula la llamada a la API usando el archivo JSON
+    // Simulation API call because Marvel api is too slow
     setCharacters(charactersData.data.results);
     setIsLoading(false);
   };
@@ -52,7 +53,7 @@ const HomePage = () => {
           ) : (
             <div className="character-list">
               {characters.map((character) => (
-                <CharacterCard character={character} isFavorite={false} />
+                <CharacterCard character={character} isFavorite={false} key={character.id} />
               ))}
             </div>
           )}

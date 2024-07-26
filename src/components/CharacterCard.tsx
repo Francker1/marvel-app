@@ -90,7 +90,7 @@ const FavoritesIcon = styled.span`
 `;
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character, isFavorite }) => (
-  <Card key={character.id}>
+  <Card>
     <CharacterLink to={`/character/${character.id}`}>
       <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
     </CharacterLink>
