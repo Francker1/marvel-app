@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import "./home-style.css";
-import { Link } from 'react-router-dom';
 import charactersData from '../data/characters.json';
-import HeartIconFilled from '../assets/Heart-icon-filled.svg';
+import CharacterCard from '../components/CharacterCard';
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,25 +52,7 @@ const HomePage = () => {
           ) : (
             <div className="character-list">
               {characters.map((character) => (
-                <div key={character.id} className="character-card">
-                  <Link to={`/character/${character.id}`} className="character-link">
-                    <img
-                      src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                      alt={character.name}
-                    />
-                  </Link>
-                  <div className="character-info">
-                    <span className="character-name">{character.name}</span>
-                   
-                    <span
-                      className="favorites-icon"
-                      onClick={() => { }}
-                    >
-                      <img src={HeartIconFilled} alt="Add to Favorites" />
-                    </span>
-                  
-                  </div>
-                </div>
+                <CharacterCard character={character} isFavorite={false} />
               ))}
             </div>
           )}
