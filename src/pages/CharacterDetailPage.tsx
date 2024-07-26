@@ -4,38 +4,51 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-
 const Hero = styled.div`
   width: 100%;
   background-color: #000;
-  height: 320px;
+  
+
+  media (min-width: 768px) {
+    height: 320px;
+  }
 `;
 
 const Container = styled.div`
-margin: 0 auto;
-max-width: 960px;
+  margin: 0 auto;
+  max-width: 960px;
+  
+  media (min-width: 768px) {
+    height: 320px;
+    padding: 20px;
+  }
 `;
 
 const CharacterImageSection = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: black;
   color: white;
-   height: 320px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
+  text-align: center;
+  
+  @media (min-width: 768px) {
+    height: 320px;
+    flex-direction: row;
+    text-align: left;
   }
 `;
 
 const CharacterImage = styled.img`
-  margin-right: 20px;
-  height: 100%;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: none;
 
-  @media (max-width: 768px) {
-    margin-right: 0;
-    margin-bottom: 20px;
-    width: 100%;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 20px;
+    height: 100%;
+    max-width: 200px;
   }
 `;
 
@@ -44,12 +57,20 @@ const CharacterInfo = styled.div`
 `;
 
 const CharacterName = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 20px;
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const CharacterDescription = styled.p`
-  font-size: 1rem;
+  font-size: 0.875rem;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const ComicsSection = styled.div`
@@ -59,20 +80,24 @@ const ComicsSection = styled.div`
 const ComicList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 10px;
   margin-top: 20px;
+
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
 `;
 
 const ComicItem = styled.div`
-  flex: 0 0 18%;
+  flex: 0 0 100%;
   text-align: left;
 
-  @media (max-width: 768px) {
+  @media (min-width: 480px) {
     flex: 0 0 45%;
   }
 
-  @media (max-width: 480px) {
-    flex: 0 0 100%;
+  @media (min-width: 768px) {
+    flex: 0 0 18%;
   }
 `;
 
@@ -83,12 +108,20 @@ const ComicImage = styled.img`
 `;
 
 const ComicTitle = styled.h3`
-  font-size: 16px;
+  font-size: 0.875rem;
   margin-bottom: 8px;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const ComicYear = styled.p`
-  font-size: 12px;
+  font-size: 0.75rem;
+
+  @media (min-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 interface CharacterDetail {
