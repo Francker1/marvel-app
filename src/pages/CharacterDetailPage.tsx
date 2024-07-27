@@ -3,13 +3,13 @@ import Header from '../components/Header';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import HeartIconFilled from '../assets/Heart-icon-filled.svg';
 
 const Hero = styled.div`
   width: 100%;
   background-color: #000;
-  
 
-  media (min-width: 768px) {
+  @media (min-width: 768px) {
     height: 320px;
   }
 `;
@@ -17,11 +17,6 @@ const Hero = styled.div`
 const Container = styled.div`
   margin: 0 auto;
   max-width: 960px;
-  
-  media (min-width: 768px) {
-    height: 320px;
-    padding: 20px;
-  }
 `;
 
 const CharacterImageSection = styled.div`
@@ -31,29 +26,42 @@ const CharacterImageSection = styled.div`
   background-color: black;
   color: white;
   text-align: center;
+  position: relative;
+  text-align: left;
   
   @media (min-width: 768px) {
     height: 320px;
     flex-direction: row;
-    text-align: left;
+    align-items: center;
   }
 `;
 
 const CharacterImage = styled.img`
-  margin-bottom: 20px;
   width: 100%;
-  max-width: none;
+  height: 398px;
+  object-fit: cover;
 
   @media (min-width: 768px) {
-    margin-bottom: 0;
-    margin-right: 20px;
+    width: auto;
     height: 100%;
-    max-width: 200px;
+    
   }
 `;
 
 const CharacterInfo = styled.div`
+  background-color: black;
+  color: white;
+  padding: 16px 24px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
   flex: 1;
+
+  @media (min-width: 768px) {
+    padding: 48px;
+  }
 `;
 
 const CharacterName = styled.h1`
@@ -66,10 +74,24 @@ const CharacterName = styled.h1`
 `;
 
 const CharacterDescription = styled.p`
-  font-size: 0.875rem;
+  font-size: 1rem;
 
   @media (min-width: 768px) {
     font-size: 1rem;
+  }
+`;
+
+const FavoriteIcon = styled.span`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -118,6 +140,7 @@ const ComicTitle = styled.h3`
 
 const ComicYear = styled.p`
   font-size: 0.75rem;
+  color: red;
 
   @media (min-width: 768px) {
     font-size: 12px;
@@ -175,6 +198,9 @@ const CharacterDetailPage: React.FC = () => {
             <CharacterInfo>
               <CharacterName>{character.name}</CharacterName>
               <CharacterDescription>{character.description}</CharacterDescription>
+              <FavoriteIcon>
+                <img src={HeartIconFilled} alt="Favorite Icon" />
+              </FavoriteIcon>
             </CharacterInfo>
           </CharacterImageSection>
         </Container>
