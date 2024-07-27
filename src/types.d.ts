@@ -81,3 +81,8 @@ export enum URLType {
   Detail = 'detail',
   Wiki = 'wiki',
 }
+
+declare module '*.json' {
+  const value: any;
+  export default value;
+}

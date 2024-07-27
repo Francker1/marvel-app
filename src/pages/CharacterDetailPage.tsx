@@ -163,6 +163,9 @@ interface CharacterDetail {
 }
 
 const CharacterDetailPage: React.FC = () => {
+  const apiKey = import.meta.env.VITE_MARVEL_API_KEY;
+  const apiHash = import.meta.env.VITE_MARVEL_API_HASH;
+
   const [character, setCharacter] = useState<CharacterDetail | null>(null);
   const [comics, setComics] = useState<any[]>([]);
   const { characterId } = useParams<{ characterId: string }>();
@@ -170,7 +173,7 @@ const CharacterDetailPage: React.FC = () => {
   useEffect(() => {
     const fetchCharacter = async () => {
       try {
-        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}?ts=1&apikey=a14d594f1d265d357ea7a3dede1d58cc&hash=c7b09862a15c17dfaa1e85e796b205fa`);
+        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}?ts=1&apikey=${apiKey}&hash=${apiHash}`);
         setCharacter(response.data.data.results[0]);
       } catch (error) {
         console.error('Error fetching character:', error);
@@ -179,7 +182,7 @@ const CharacterDetailPage: React.FC = () => {
 
     const fetchComics = async () => {
       try {
-        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=1&apikey=a14d594f1d265d357ea7a3dede1d58cc&hash=c7b09862a15c17dfaa1e85e796b205fa&limit=20&orderBy=onsaleDate`);
+        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=1&apikey=${apiKey}&hash=${apiHash}&limit=20&orderBy=onsaleDate`);
         setComics(response.data.data.results);
       } catch (error) {
         console.error('Error fetching comics:', error);
