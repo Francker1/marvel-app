@@ -25,7 +25,6 @@ const CharacterImageSection = styled.div`
   align-items: center;
   background-color: black;
   color: white;
-  text-align: center;
   position: relative;
   text-align: left;
   
@@ -39,28 +38,28 @@ const CharacterImageSection = styled.div`
 const CharacterImage = styled.img`
   width: 100%;
   height: 398px;
-  object-fit: cover;
+  object-fit: inherit;
 
   @media (min-width: 768px) {
     width: auto;
     height: 100%;
-    
   }
 `;
 
 const CharacterInfo = styled.div`
+  width: 100%
   background-color: black;
   color: white;
   padding: 16px 24px;
   min-height: 210px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   position: relative;
   flex: 1;
 
   @media (min-width: 768px) {
     padding: 48px;
+    justify-content: space-between;
   }
 `;
 
@@ -97,6 +96,12 @@ const FavoriteIcon = styled.span`
 
 const ComicsSection = styled.div`
   margin-top: 40px;
+  margin-bottom: 48px;
+  padding: 48px;
+
+  @media (min-width: 1024px) {
+    padding: 0;
+  }
 `;
 
 const ComicList = styled.div`
@@ -104,11 +109,18 @@ const ComicList = styled.div`
   overflow-x: scroll;
   gap: 16px;
   margin-top: 20px;
-  padding-bottom: 10px;
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-    display: none;
+    height: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #D9D9D9;
+  }
+
+  &::-webkit-scrollbar-thumb{
+    background-color: #EC1D24;
   }
 `;
 
@@ -116,6 +128,7 @@ const ComicItem = styled.div`
   flex: 0 0 18%;
   text-align: left;
   min-width: 150px;
+  margin-bottom: 24px;
 
   @media (max-width: 768px) {
     flex: 0 0 45%;
@@ -128,26 +141,17 @@ const ComicItem = styled.div`
 
 const ComicImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 270px;
   margin-bottom: 12px;
 `;
 
 const ComicTitle = styled.h3`
-  font-size: 0.875rem;
+  font-size: 16px;
   margin-bottom: 8px;
-
-  @media (min-width: 768px) {
-    font-size: 16px;
-  }
 `;
 
 const ComicYear = styled.p`
-  font-size: 0.75rem;
-  color: red;
-
-  @media (min-width: 768px) {
-    font-size: 12px;
-  }
+  font-size: 12px;
 `;
 interface CharacterDetail {
   name: string;
@@ -175,7 +179,7 @@ const CharacterDetailPage: React.FC = () => {
 
     const fetchComics = async () => {
       try {
-        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=1&apikey=a14d594f1d265d357ea7a3dede1d58cc&hash=c7b09862a15c17dfaa1e85e796b205fa`);
+        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=1&apikey=a14d594f1d265d357ea7a3dede1d58cc&hash=c7b09862a15c17dfaa1e85e796b205fa&limit=20&orderBy=onsaleDate`);
         setComics(response.data.data.results);
       } catch (error) {
         console.error('Error fetching comics:', error);
@@ -219,7 +223,7 @@ const CharacterDetailPage: React.FC = () => {
               ))}
             </ComicList>
           </ComicsSection>
-        </Container>\</>)}
+        </Container></>)}
 
     </>
   );
