@@ -101,25 +101,28 @@ const ComicsSection = styled.div`
 
 const ComicList = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  overflow-x: scroll;
+  gap: 16px;
   margin-top: 20px;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
 
-  @media (min-width: 768px) {
-    gap: 16px;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 
 const ComicItem = styled.div`
-  flex: 0 0 100%;
+  flex: 0 0 18%;
   text-align: left;
+  min-width: 150px;
 
-  @media (min-width: 480px) {
+  @media (max-width: 768px) {
     flex: 0 0 45%;
   }
 
-  @media (min-width: 768px) {
-    flex: 0 0 18%;
+  @media (max-width: 480px) {
+    flex: 0 0 70%;
   }
 `;
 
@@ -146,7 +149,6 @@ const ComicYear = styled.p`
     font-size: 12px;
   }
 `;
-
 interface CharacterDetail {
   name: string;
   description: string;
@@ -184,14 +186,12 @@ const CharacterDetailPage: React.FC = () => {
     fetchComics();
   }, [characterId]);
 
-  if (!character) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
       <Header />
-      <Hero>
+
+      {!character ? (<div>Loading...</div>) : (<><Hero>
         <Container>
           <CharacterImageSection>
             <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
@@ -206,20 +206,21 @@ const CharacterDetailPage: React.FC = () => {
         </Container>
       </Hero>
 
-      <Container>
-        <ComicsSection>
-          <h2>Comics</h2>
-          <ComicList>
-            {comics.map((comic) => (
-              <ComicItem key={comic.id}>
-                <ComicImage src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} />
-                <ComicTitle>{comic.title}</ComicTitle>
-                <ComicYear>{new Date(comic.dates[0].date).getFullYear()}</ComicYear>
-              </ComicItem>
-            ))}
-          </ComicList>
-        </ComicsSection>
-      </Container>
+        <Container>
+          <ComicsSection>
+            <h2>Comics</h2>
+            <ComicList>
+              {comics.map((comic) => (
+                <ComicItem key={comic.id}>
+                  <ComicImage src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} />
+                  <ComicTitle>{comic.title}</ComicTitle>
+                  <ComicYear>{new Date(comic.dates[0].date).getFullYear()}</ComicYear>
+                </ComicItem>
+              ))}
+            </ComicList>
+          </ComicsSection>
+        </Container>\</>)}
+
     </>
   );
 };
