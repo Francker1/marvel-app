@@ -30,6 +30,16 @@ const HomePage = () => {
 
   const fetchCharacters = async (nameStartsWith = '') => {
     setIsLoading(true);
+
+    const cacheKey = nameStartsWith ? `characters_${nameStartsWith}` : 'characters';
+    const cachedData = localStorage.getItem(cacheKey);
+
+    if (cachedData) {
+      setCharacters(JSON.parse(cachedData));
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.get(apiBaseUrl, {
         params: {
@@ -40,7 +50,10 @@ const HomePage = () => {
           nameStartsWith: nameStartsWith || undefined,
         },
       });
+
       setCharacters(response.data.data.results);
+      localStorage.setItem(cacheKey, JSON.stringify(response.data.data.results));
+      
     } catch (error) {
       console.error('Error fetching characters:', error);
     } finally {
