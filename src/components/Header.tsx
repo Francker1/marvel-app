@@ -16,8 +16,10 @@ const Header: React.FC = () => {
           <img src={MarvelLogo} alt="Marvel Logo" className="logo" />
         </Link>
         <div className="favorites-icon">
+          <Link to="/favorites">
           <img src={HeartIconFilled} alt="Favorites" />
-          <span className="favorites-count">{favorites.length}</span>
+            <span className="favorites-count">{favorites.length}</span>
+          </Link>
         </div>
       </div>
     </header>

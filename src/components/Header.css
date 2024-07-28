@@ -34,6 +34,11 @@
   height: 24px;
 }
 
+.favorites-icon a {
+  color: var(--whiteColor);
+  text-decoration: none;
+}
+
 .favorites-count{
   margin-left: 8px;
 }
