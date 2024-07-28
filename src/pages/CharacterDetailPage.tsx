@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/Header';
+import { useFavorites } from '../context/FavoritesContext';
 import HeartIconFilled from '../assets/Heart-icon-filled.svg';
+import HeartIconEmpty from '../assets/Heart-icon-empty.svg';
 
 const Hero = styled.div`
   width: 100%;
@@ -154,6 +156,7 @@ const ComicYear = styled.p`
   font-size: 12px;
 `;
 interface CharacterDetail {
+  id: number;
   name: string;
   description: string;
   thumbnail: {
@@ -163,12 +166,14 @@ interface CharacterDetail {
 }
 
 const CharacterDetailPage: React.FC = () => {
+
   const apiKey = import.meta.env.VITE_MARVEL_API_KEY;
   const apiHash = import.meta.env.VITE_MARVEL_API_HASH;
 
   const [character, setCharacter] = useState<CharacterDetail | null>(null);
   const [comics, setComics] = useState<any[]>([]);
   const { characterId } = useParams<{ characterId: string }>();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
     const fetchCharacter = async () => {
@@ -194,6 +199,15 @@ const CharacterDetailPage: React.FC = () => {
   }, [characterId]);
 
 
+  const handleFavoriteClick = () => {
+    if (!character) return;
+    if (isFavorite(character.id)) {
+      removeFavorite(character.id);
+    } else {
+      addFavorite(character);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -205,8 +219,8 @@ const CharacterDetailPage: React.FC = () => {
             <CharacterInfo>
               <CharacterName>{character.name}</CharacterName>
               <CharacterDescription>{character.description}</CharacterDescription>
-              <FavoriteIcon>
-                <img src={HeartIconFilled} alt="Favorite Icon" />
+              <FavoriteIcon onClick={handleFavoriteClick}>
+                <img src={isFavorite(character.id) ? HeartIconFilled : HeartIconEmpty} alt="Favorite Icon" />
               </FavoriteIcon>
             </CharacterInfo>
           </CharacterImageSection>

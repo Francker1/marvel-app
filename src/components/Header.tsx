@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useFavorites } from '../context/FavoritesContext';
 import './Header.css';
 import MarvelLogo from '../assets/Marvel-logo.svg';
 import HeartIconFilled from '../assets/Heart-icon-filled.svg';
 
 const Header: React.FC = () => {
+
+  const { favorites } = useFavorites();
+
   return (
     <header className="header">
       <div className="header-content">
@@ -13,7 +17,7 @@ const Header: React.FC = () => {
         </Link>
         <div className="favorites-icon">
           <img src={HeartIconFilled} alt="Favorites" />
-          <span className="favorites-count">3</span>
+          <span className="favorites-count">{favorites.length}</span>
         </div>
       </div>
     </header>

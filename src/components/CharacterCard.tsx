@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HeartIconFilled from '../assets/Heart-icon-filled.svg';
+import HeartIconFilledWhite from '../assets/Heart-icon-white.svg';
+import HeartIconEmpty from '../assets/Heart-icon-empty.svg';
 
 interface CharacterCardProps {
   character: any;
   isFavorite: boolean;
+  addFavorite: (character: any) => void;
+  removeFavorite: (characterId: number) => void;
 }
 
 const Card = styled.div`
@@ -71,7 +76,7 @@ const CharacterName = styled.span`
   text-transform: uppercase;
 `;
 
-const FavoritesIcon = styled.span`
+const FavoritesIcon = styled.span<{ isHovered: boolean }>`
   cursor: pointer;
   width: 14px;
   height: 14px;
@@ -89,20 +94,43 @@ const FavoritesIcon = styled.span`
   }
 `;
 
-const CharacterCard: React.FC<CharacterCardProps> = ({ character, isFavorite }) => (
-  <Card>
-    <CharacterLink to={`/character/${character.id}`}>
-      <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
-    </CharacterLink>
-    <CharacterInfo>
-      <CharacterName>{character.name}</CharacterName>
-      <FavoritesIcon onClick={(e) => {
-        e.stopPropagation();
-      }}>
-        <img src={HeartIconFilled} alt="Add to Favorites" style={{ filter: isFavorite ? 'invert(1)' : 'none' }} />
-      </FavoritesIcon>
-    </CharacterInfo>
-  </Card>
-);
+const CharacterCard: React.FC<CharacterCardProps> = ({ character, isFavorite, addFavorite, removeFavorite }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isFavorite) {
+      removeFavorite(character.id);
+    } else {
+      addFavorite(character);
+    }
+  };
+
+  return (
+    <Card
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <CharacterLink to={`/character/${character.id}`}>
+        <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
+      </CharacterLink>
+      <CharacterInfo>
+        <CharacterName>{character.name}</CharacterName>
+        <FavoritesIcon isHovered={isHovered} onClick={handleFavoriteClick}>
+          <img
+            src={
+              isFavorite
+                ? isHovered
+                  ? HeartIconFilledWhite
+                  : HeartIconFilled
+                : HeartIconEmpty
+            }
+            alt="Add to Favorites"
+          />
+        </FavoritesIcon>
+      </CharacterInfo>
+    </Card>
+  );
+};
 
 export default CharacterCard;

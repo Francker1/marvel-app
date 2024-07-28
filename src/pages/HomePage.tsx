@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import "./home-style.css";
+import './home-style.css';
 import charactersData from '../data/characters.json';
 import CharacterCard from '../components/CharacterCard';
 //import { type Character } from '../types';
+import { useFavorites } from '../context/FavoritesContext';
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const { isFavorite, addFavorite, removeFavorite } = useFavorites();
 
   useEffect(() => {
     // fetch(
@@ -53,7 +55,13 @@ const HomePage = () => {
           ) : (
             <div className="character-list">
               {characters.map((character) => (
-                <CharacterCard character={character} isFavorite={false} key={character.id} />
+                <CharacterCard
+                  key={character.id}
+                  character={character}
+                  isFavorite={isFavorite(character.id)}
+                  addFavorite={addFavorite}
+                  removeFavorite={removeFavorite}
+                />
               ))}
             </div>
           )}
