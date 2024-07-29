@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import './home-style.css';
 import CharacterCard from '../components/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';
+import SearchIcon from '../assets/Search-icon.svg';
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,13 +19,16 @@ const FavoritesPage = () => {
       <div className="container">
         <main className="main-content">
           <h1>Favorites</h1>
-          <input
-            type="text"
-            placeholder="Search a character..."
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
+          <div className="search-container">
+            <img src={SearchIcon} alt="Search Icon" className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search a character"
+              className="search-input"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
           <div className="results-count">{favorites.length} RESULTS</div>
           <div className="character-list">
             {favorites

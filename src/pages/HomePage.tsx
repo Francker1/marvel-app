@@ -5,6 +5,7 @@ import CharacterCard from '../components/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';
 import axios from 'axios';
 import { Character } from '../types';
+import SearchIcon from '../assets/Search-icon.svg';
 
 const apiKey = import.meta.env.VITE_MARVEL_API_KEY;
 const apiHash = import.meta.env.VITE_MARVEL_API_HASH;
@@ -70,13 +71,17 @@ const HomePage = () => {
       <Header />
       <div className="container">
         <main className="main-content">
-          <input
-            type="text"
-            placeholder="Search a character..."
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
+          <div className="search-container">
+            <img src={SearchIcon} alt="Search Icon" className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search a character"
+              className="search-input"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+         
           <div className="results-count">{characters.length} RESULTS</div>
           {isLoading ? (
             <p>Cargando...</p>

@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,6 +12,8 @@
   --blackColor: #000000;
   --whiteColor: #FFFFFF;
   --marvelRed: #EC1D24;
+  --primaryFont: 'Roboto Condensed';
+  --greyColor: #AAAAAA;
 }
 
 * {
@@ -24,7 +23,7 @@
 }
 
 body {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: var(--primaryFont), sans-serif;
   min-width: 320px;
   min-height: 100vh;
 }
