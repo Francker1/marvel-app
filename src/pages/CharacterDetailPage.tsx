@@ -10,10 +10,22 @@ import { CharacterDetail, Comics } from '../types';
 
 const Hero = styled.div`
   width: 100%;
-  background-color: #000;
+  background-color: #000000;
+  position: relative;
 
   @media (min-width: 768px) {
     height: 320px;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 24px solid transparent;
+    border-bottom: 24px solid #FFFFFF;
   }
 `;
 

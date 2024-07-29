@@ -50,34 +50,26 @@ const CharacterInfo = styled.div`
   }
 `;
 
-const CharacterName = styled.h1`
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+const CharacterHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+`;
 
-  @media (min-width: 768px) {
-    font-size: 2rem;
-  }
+const CharacterName = styled.h1`
+  font-size: 32px;
 `;
 
 const CharacterDescription = styled.p`
-  font-size: 1rem;
-
-  @media (min-width: 768px) {
-    font-size: 1rem;
-  }
+  font-size: 16px;
 `;
 
 const FavoriteIcon = styled.span`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 24px;
+    height: 24px;
   }
 `;
 
@@ -105,16 +97,19 @@ const CharacterImageSection: React.FC<CharacterImageSectionProps> = ({
           alt={character.name}
         />
         <CharacterInfo>
-          <CharacterName>{character.name}</CharacterName>
+          <CharacterHeader>
+            <CharacterName>{character.name}</CharacterName>
+            <FavoriteIcon onClick={handleFavoriteClick}>
+              <img
+                src={
+                  isFavorite(character.id) ? HeartIconFilled : HeartIconEmpty
+                }
+                alt="Favorite Icon"
+              />
+            </FavoriteIcon>
+          </CharacterHeader>
           <CharacterDescription>{character.description}</CharacterDescription>
-          <FavoriteIcon onClick={handleFavoriteClick}>
-            <img
-              src={
-                isFavorite(character.id) ? HeartIconFilled : HeartIconEmpty
-              }
-              alt="Favorite Icon"
-            />
-          </FavoriteIcon>
+
         </CharacterInfo>
 
       </CharacterImageSectionWrapper>
