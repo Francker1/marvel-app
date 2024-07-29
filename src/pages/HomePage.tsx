@@ -3,13 +3,10 @@ import Header from '../components/Header';
 import './home-style.css';
 import CharacterCard from '../components/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';
-import axios from 'axios';
+import MarvelService from '../services/api';
 import { Character } from '../types';
 import SearchIcon from '../assets/Search-icon.svg';
 
-const apiKey = import.meta.env.VITE_MARVEL_API_KEY;
-const apiHash = import.meta.env.VITE_MARVEL_API_HASH;
-const apiBaseUrl = 'https://gateway.marvel.com/v1/public/characters';
 
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,45 +15,24 @@ const HomePage = () => {
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
 
   useEffect(() => {
-    fetchCharacters();
+    loadCharacters();
   }, []);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      fetchCharacters(searchTerm);
-    }, 500);
+      loadCharacters(searchTerm);
+    }, 300);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
 
-  const fetchCharacters = async (nameStartsWith = '') => {
+  const loadCharacters = async (nameStartsWith = '') => {
     setIsLoading(true);
-
-    const cacheKey = nameStartsWith ? `characters_${nameStartsWith}` : 'characters';
-    const cachedData = localStorage.getItem(cacheKey);
-
-    if (cachedData) {
-      setCharacters(JSON.parse(cachedData));
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      const response = await axios.get(apiBaseUrl, {
-        params: {
-          apikey: apiKey,
-          ts: 1,
-          hash: apiHash,
-          limit: 30,
-          nameStartsWith: nameStartsWith || undefined,
-        },
-      });
-
-      setCharacters(response.data.data.results);
-      localStorage.setItem(cacheKey, JSON.stringify(response.data.data.results));
-      
+      const characters = await MarvelService.fetchCharacters(nameStartsWith);
+      setCharacters(characters);
     } catch (error) {
-      console.error('Error fetching characters:', error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +57,7 @@ const HomePage = () => {
               onChange={handleSearchChange}
             />
           </div>
-         
+
           <div className="results-count">{characters.length} RESULTS</div>
           {isLoading ? (
             <p>Cargando...</p>

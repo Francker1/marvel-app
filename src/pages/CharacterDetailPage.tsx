@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import MarvelService from '../services/api';
 import Header from '../components/Header';
 import { useFavorites } from '../context/FavoritesContext';
 import HeartIconFilled from '../assets/Heart-icon-filled.svg';
@@ -167,35 +167,32 @@ interface CharacterDetail {
 
 const CharacterDetailPage: React.FC = () => {
 
-  const apiKey = import.meta.env.VITE_MARVEL_API_KEY;
-  const apiHash = import.meta.env.VITE_MARVEL_API_HASH;
-
   const [character, setCharacter] = useState<CharacterDetail | null>(null);
   const [comics, setComics] = useState<any[]>([]);
   const { characterId } = useParams<{ characterId: string }>();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
-    const fetchCharacter = async () => {
+    const loadCharacterData = async () => {
       try {
-        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}?ts=1&apikey=${apiKey}&hash=${apiHash}`);
-        setCharacter(response.data.data.results[0]);
+        const characterData = await MarvelService.fetchCharacterById(characterId);
+        setCharacter(characterData);
       } catch (error) {
         console.error('Error fetching character:', error);
       }
     };
 
-    const fetchComics = async () => {
+    const loadComicsData = async () => {
       try {
-        const response = await axios.get(`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?ts=1&apikey=${apiKey}&hash=${apiHash}&limit=20&orderBy=onsaleDate`);
-        setComics(response.data.data.results);
+        const comicsData = await MarvelService.fetchComicsByCharacterId(characterId);
+        setComics(comicsData);
       } catch (error) {
         console.error('Error fetching comics:', error);
       }
     };
 
-    fetchCharacter();
-    fetchComics();
+    loadCharacterData();
+    loadComicsData();
   }, [characterId]);
 
 
