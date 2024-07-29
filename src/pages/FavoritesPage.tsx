@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Header from '../components/Header/Header';
 import './home-style.css';
-import CharacterCard from '../components/CharacterCard';
+import CharacterCard from '../components/CharacterCard/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';
-import SearchIcon from '../assets/Search-icon.svg';
+import SearchIcon from '../assets/img/Search-icon.svg';
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');

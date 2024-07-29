@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loader from './Loader/Loader';
+import Loader from '../Loader/Loader';
 
 const ComicsSectionWrapper = styled.div`
   margin-top: 40px;
@@ -75,18 +75,16 @@ const ComicsSection: React.FC<ComicsSectionProps> = ({ comics, isLoading }) => {
         <Loader />
       ) : (
         <ComicList>
-          {comics.map((comic) => (
-            <ComicItem key={comic.id}>
-              <ComicImage
-                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                alt={comic.title}
-              />
-              <ComicTitle>{comic.title}</ComicTitle>
-              <ComicYear>
-                {new Date(comic.dates[0].date).getFullYear()}
-              </ComicYear>
-            </ComicItem>
-          ))}
+          {comics.map((comic) => {
+            const year = new Date(comic.dates[0].date).getFullYear();
+            return (
+              <ComicItem key={comic.id}>
+                <ComicImage src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} />
+                <ComicTitle>{comic.title}</ComicTitle>
+                <ComicYear>{isNaN(year) ? 'Unknown' : year}</ComicYear>
+              </ComicItem>
+            );
+          })}
         </ComicList>
       )}
     </ComicsSectionWrapper>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import HeartIconFilled from '../assets/Heart-icon-filled.svg';
-import HeartIconFilledWhite from '../assets/Heart-icon-white.svg';
-import HeartIconEmpty from '../assets/Heart-icon-empty.svg';
+import HeartIconFilled from '../../assets/img/Heart-icon-filled.svg';
+import HeartIconFilledWhite from '../../assets/img/Heart-icon-white.svg';
+import HeartIconEmpty from '../../assets/img/Heart-icon-empty.svg';
 
 interface CharacterCardProps {
   character: any;

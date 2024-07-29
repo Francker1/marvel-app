@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import MarvelService from '../services/api';
 import Header from '../components/Header/Header';
 import { useFavorites } from '../context/FavoritesContext';
-import CharacterImageSection from '../components/CharacterImageSection';
-import ComicsSection from '../components/ComicsSection';
+import CharacterImageSection from '../components/CharacterImageSection/CharacterImageSection';
+import ComicsSection from '../components/ComicsSection/ComicsSection';
 import { CharacterDetail, Comics } from '../types';
 
 const Hero = styled.div`

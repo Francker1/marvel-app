@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
 import './Header.css';
-import MarvelLogo from '../../assets/Marvel-logo.svg';
-import HeartIconFilled from '../../assets/Heart-icon-filled.svg';
+import MarvelLogo from '../../assets/img/Marvel-logo.svg';
+import HeartIconFilled from '../../assets/img/Heart-icon-filled.svg';
 
 const Header: React.FC = () => {
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeartIconFilled from '../assets/Heart-icon-filled.svg';
-import HeartIconEmpty from '../assets/Heart-icon-empty.svg';
-import { CharacterDetail } from '../types';
-import { useFavorites } from '../context/FavoritesContext';
-import Loader from './Loader/Loader';
+import { CharacterDetail } from '../../types';
+import { useFavorites } from '../../context/FavoritesContext';
+import Loader from '../Loader/Loader';
+import HeartIconFilled from '../../assets/img/Heart-icon-filled.svg';
+import HeartIconEmpty from '../../assets/img/Heart-icon-empty.svg';
 
 const CharacterImageSectionWrapper = styled.div`
   display: flex;
