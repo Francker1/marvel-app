@@ -6,6 +6,7 @@ import { useFavorites } from '../context/FavoritesContext';
 import MarvelService from '../services/api';
 import { Character } from '../types';
 import SearchIcon from '../assets/Search-icon.svg';
+import Loader from '../components/Loader/Loader';
 
 
 const HomePage = () => {
@@ -60,7 +61,7 @@ const HomePage = () => {
 
           <div className="results-count">{characters.length} RESULTS</div>
           {isLoading ? (
-            <p>Cargando...</p>
+            <Loader />
           ) : (
             <div className="character-list">
               {characters.map((character) => (

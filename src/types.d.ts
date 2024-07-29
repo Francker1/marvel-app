@@ -30,6 +30,16 @@ export interface Character {
   urls: URL[];
 }
 
+export interface CharacterDetail {
+  id: number;
+  name: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+}
+
 export interface Comics {
   available: number;
   collectionURI: string;

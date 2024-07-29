@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import { useFavorites } from '../context/FavoritesContext';
 import HeartIconFilled from '../assets/Heart-icon-filled.svg';
 import HeartIconEmpty from '../assets/Heart-icon-empty.svg';
+import Loader from '../components/Loader/Loader';
+import { CharacterDetail } from '../types';
 
 const Hero = styled.div`
   width: 100%;
@@ -155,15 +157,7 @@ const ComicTitle = styled.h3`
 const ComicYear = styled.p`
   font-size: 12px;
 `;
-interface CharacterDetail {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-}
+
 
 const CharacterDetailPage: React.FC = () => {
 
@@ -171,23 +165,31 @@ const CharacterDetailPage: React.FC = () => {
   const [comics, setComics] = useState<any[]>([]);
   const { characterId } = useParams<{ characterId: string }>();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const [isLoadingCharacter, setIsLoadingCharacter] = useState(true);
+  const [isLoadingComics, setIsLoadingComics] = useState(true);
 
   useEffect(() => {
     const loadCharacterData = async () => {
+      setIsLoadingCharacter(true);
       try {
         const characterData = await MarvelService.fetchCharacterById(characterId);
         setCharacter(characterData);
       } catch (error) {
         console.error('Error fetching character:', error);
+      } finally {
+        setIsLoadingCharacter(false);
       }
     };
 
     const loadComicsData = async () => {
+      setIsLoadingComics(true);
       try {
         const comicsData = await MarvelService.fetchComicsByCharacterId(characterId);
         setComics(comicsData);
       } catch (error) {
         console.error('Error fetching comics:', error);
+      } finally {
+        setIsLoadingComics(false);
       }
     };
 
@@ -208,25 +210,35 @@ const CharacterDetailPage: React.FC = () => {
   return (
     <>
       <Header />
-
-      {!character ? (<div>Loading...</div>) : (<><Hero>
+      <Hero>
         <Container>
-          <CharacterImageSection>
-            <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
-            <CharacterInfo>
-              <CharacterName>{character.name}</CharacterName>
-              <CharacterDescription>{character.description}</CharacterDescription>
-              <FavoriteIcon onClick={handleFavoriteClick}>
-                <img src={isFavorite(character.id) ? HeartIconFilled : HeartIconEmpty} alt="Favorite Icon" />
-              </FavoriteIcon>
-            </CharacterInfo>
-          </CharacterImageSection>
+          {isLoadingCharacter ? (
+            <Loader />
+          ) : character ? (
+
+            <CharacterImageSection>
+              <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
+              <CharacterInfo>
+                <CharacterName>{character.name}</CharacterName>
+                <CharacterDescription>{character.description}</CharacterDescription>
+                <FavoriteIcon onClick={handleFavoriteClick}>
+                  <img src={isFavorite(character.id) ? HeartIconFilled : HeartIconEmpty} alt="Favorite Icon" />
+                </FavoriteIcon>
+              </CharacterInfo>
+            </CharacterImageSection>
+
+          ) : (
+            <div>Error loading character data</div>
+          )}
         </Container>
       </Hero>
+      <Container>
+        <ComicsSection>
+          <h2>Comics</h2>
+          {isLoadingComics ? (
+            <Loader />
+          ) : (
 
-        <Container>
-          <ComicsSection>
-            <h2>Comics</h2>
             <ComicList>
               {comics.map((comic) => (
                 <ComicItem key={comic.id}>
@@ -236,9 +248,10 @@ const CharacterDetailPage: React.FC = () => {
                 </ComicItem>
               ))}
             </ComicList>
-          </ComicsSection>
-        </Container></>)}
 
+          )}
+        </ComicsSection>
+      </Container>
     </>
   );
 };
