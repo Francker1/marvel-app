@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header/Header';
-import './home-style.css';
 import CharacterCard from '../components/CharacterCard/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';
 import MarvelService from '../services/api';
 import { Character } from '../types';
 import Loader from '../components/Loader/Loader';
 import SearchIcon from '../assets/img/Search-icon.svg';
+import '../global.css';
 
 
 const HomePage = () => {
