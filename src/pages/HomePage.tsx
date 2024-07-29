@@ -47,7 +47,7 @@ const HomePage = () => {
           apikey: apiKey,
           ts: 1,
           hash: apiHash,
-          limit: 25,
+          limit: 30,
           nameStartsWith: nameStartsWith || undefined,
         },
       });
