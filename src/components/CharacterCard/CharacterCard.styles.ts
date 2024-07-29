@@ -64,7 +64,7 @@ export const CharacterName = styled.span`
   text-transform: uppercase;
 `;
 
-export const FavoritesIcon = styled.span.attrs<{ isHovered: boolean }>((props) => ({
+export const FavoritesIcon = styled.span.attrs<{ isHovered: boolean }>(() => ({
   isHovered: undefined,
 }))<{ isHovered: boolean }>`
   cursor: pointer;
