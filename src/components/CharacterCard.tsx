@@ -13,7 +13,7 @@ interface CharacterCardProps {
 }
 
 const Card = styled.div`
-  background-color: #fff;
+  background-color: #FFFFFF;
   overflow: hidden;
   text-align: center;
   cursor: pointer;
@@ -29,7 +29,7 @@ const CharacterLink = styled(Link)`
     display: block;
     width: 100%;
     height: 7px;
-    background-color: red;
+    background-color: #EC1D24;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -43,9 +43,8 @@ const CharacterImage = styled.img`
 
 const CharacterInfo = styled.div`
   height: 56px;
-  background: linear-gradient(to bottom, red 0%, red 0%, transparent 0%);
-  background-color: black;
-  color: white;
+  background-color: #000000;
+  color: #FFFFFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +53,7 @@ const CharacterInfo = styled.div`
   transition: background 0.3s ease;
 
   ${Card}:hover & {
-    background: linear-gradient(to bottom, red 0%, red 100%);
+    background: #EC1D24;
   }
 
   &:after {
@@ -65,7 +64,7 @@ const CharacterInfo = styled.div`
     width: 0;
     height: 0;
     border-left: 12px solid transparent;
-    border-bottom: 12px solid white;
+    border-bottom: 12px solid #FFFFFF;
   }
 `;
 
@@ -76,7 +75,9 @@ const CharacterName = styled.span`
   text-transform: uppercase;
 `;
 
-const FavoritesIcon = styled.span<{ isHovered: boolean }>`
+const FavoritesIcon = styled.span.attrs<{ isHovered: boolean }>(props => ({
+  isHovered: undefined
+})) <{ isHovered: boolean }>`
   cursor: pointer;
   width: 14px;
   height: 14px;

@@ -9,10 +9,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --primaryFont: 'Roboto Condensed';
   --blackColor: #000000;
   --whiteColor: #FFFFFF;
   --marvelRed: #EC1D24;
-  --primaryFont: 'Roboto Condensed';
   --greyColor: #AAAAAA;
 }
 
