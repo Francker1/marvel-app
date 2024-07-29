@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useFavorites } from '../context/FavoritesContext';
+import { useFavorites } from '../../context/FavoritesContext';
 import './Header.css';
-import MarvelLogo from '../assets/Marvel-logo.svg';
-import HeartIconFilled from '../assets/Heart-icon-filled.svg';
+import MarvelLogo from '../../assets/Marvel-logo.svg';
+import HeartIconFilled from '../../assets/Heart-icon-filled.svg';
 
 const Header: React.FC = () => {
 
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         </Link>
         <div className="favorites-icon">
           <Link to="/favorites">
-          <img src={HeartIconFilled} alt="Favorites" />
+            <img src={HeartIconFilled} alt="Favorites" />
             <span className="favorites-count">{favorites.length}</span>
           </Link>
         </div>

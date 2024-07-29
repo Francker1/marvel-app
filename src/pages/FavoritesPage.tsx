@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import './home-style.css';
 import CharacterCard from '../components/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';

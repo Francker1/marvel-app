@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import MarvelService from '../services/api';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import { useFavorites } from '../context/FavoritesContext';
 import CharacterImageSection from '../components/CharacterImageSection';
 import ComicsSection from '../components/ComicsSection';

@@ -1,9 +1,13 @@
 .header {
   background-color: var(--blackColor);
   color: var(--whiteColor);
-  padding: 16px 48px;
+  padding: 16px;
   display: flex;
   align-items: center;
+
+  @media (min-width: 768px) {
+    padding: 16px 24px 16px 16px;
+  }
 }
 
 .header-content {
@@ -39,6 +43,6 @@
   text-decoration: none;
 }
 
-.favorites-count{
+.favorites-count {
   margin-left: 8px;
 }
