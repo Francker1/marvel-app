@@ -5,7 +5,7 @@ import { useFavorites } from '../context/FavoritesContext';
 import MarvelService from '../services/api';
 import { Character } from '../types';
 import Loader from '../components/Loader/Loader';
-import SearchIcon from '../assets/img/Search-icon.svg';
+import Search from '../components/Search/Search';
 import '../global.css';
 
 
@@ -48,16 +48,7 @@ const HomePage = () => {
       <Header />
       <div className="container">
         <main className="main-content">
-          <div className="search-container">
-            <img src={SearchIcon} alt="Search Icon" className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search a character"
-              className="search-input"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
+          <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange}/>
 
           <div className="results-count">{characters.length} RESULTS</div>
           {isLoading ? (

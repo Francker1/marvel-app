@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Header from '../components/Header/Header';
 import CharacterCard from '../components/CharacterCard/CharacterCard';
 import { useFavorites } from '../context/FavoritesContext';
-import SearchIcon from '../assets/img/Search-icon.svg';
+import Search from '../components/Search/Search';
 import '../global.css';
 
 const FavoritesPage = () => {
@@ -19,16 +19,7 @@ const FavoritesPage = () => {
       <div className="container">
         <main className="main-content">
           <h1>Favorites</h1>
-          <div className="search-container">
-            <img src={SearchIcon} alt="Search Icon" className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search a character"
-              className="search-input"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
+          <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
           <div className="results-count">{favorites.length} RESULTS</div>
           <div className="character-list">
             {favorites
