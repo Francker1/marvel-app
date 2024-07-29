@@ -1,18 +1,10 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { CharacterDetail } from '../types';
 
-interface Character {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-}
 
 interface FavoritesContextProps {
-  favorites: Character[];
-  addFavorite: (character: Character) => void;
+  favorites: CharacterDetail[];
+  addFavorite: (character: CharacterDetail) => void;
   removeFavorite: (characterId: number) => void;
   isFavorite: (characterId: number) => boolean;
 }
@@ -29,9 +21,9 @@ export const useFavorites = (): FavoritesContextProps => {
 };
 
 export const FavoritesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [favorites, setFavorites] = useState<Character[]>([]);
+  const [favorites, setFavorites] = useState<CharacterDetail[]>([]);
 
-  const addFavorite = (character: Character) => {
+  const addFavorite = (character: CharacterDetail) => {
     setFavorites((prevFavorites) => [...prevFavorites, character]);
   };
 
