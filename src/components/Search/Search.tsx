@@ -20,6 +20,6 @@ const Search: React.FC<SearchProps> = ({ searchTerm, handleSearchChange }) => {
       />
     </div>
   );
-}
+};
 
 export default Search;

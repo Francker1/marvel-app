@@ -37,7 +37,9 @@ const fetchCharacters = async (nameStartsWith = ''): Promise<Character[]> => {
   }
 };
 
-const fetchCharacterById = async (characterId: string | undefined): Promise<Character> => {
+const fetchCharacterById = async (
+  characterId: string | undefined,
+): Promise<Character> => {
   try {
     const response = await axios.get(`${apiBaseUrl}/${characterId}`, {
       params: {

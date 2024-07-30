@@ -1,6 +1,13 @@
 import React from 'react';
 import Loader from '../Loader/Loader';
-import { ComicsSectionWrapper, ComicList, ComicItem, ComicImage, ComicTitle, ComicYear } from './ComicsSection.styles';
+import {
+  ComicsSectionWrapper,
+  ComicList,
+  ComicItem,
+  ComicImage,
+  ComicTitle,
+  ComicYear,
+} from './ComicsSection.styles';
 
 interface ComicsSectionProps {
   comics: any[];
@@ -19,7 +26,10 @@ const ComicsSection: React.FC<ComicsSectionProps> = ({ comics, isLoading }) => {
             const year = new Date(comic.dates[0].date).getFullYear();
             return (
               <ComicItem key={comic.id}>
-                <ComicImage src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} />
+                <ComicImage
+                  src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                  alt={comic.title}
+                />
                 <ComicTitle>{comic.title}</ComicTitle>
                 <ComicYear>{isNaN(year) ? 'Unknown' : year}</ComicYear>
               </ComicItem>

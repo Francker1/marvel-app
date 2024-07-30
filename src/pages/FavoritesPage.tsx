@@ -19,11 +19,16 @@ const FavoritesPage = () => {
       <div className="container">
         <main className="main-content">
           <h1>Favorites</h1>
-          <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
+          <Search
+            searchTerm={searchTerm}
+            handleSearchChange={handleSearchChange}
+          />
           <div className="results-count">{favorites.length} RESULTS</div>
           <div className="character-list">
             {favorites
-              .filter((character) => character.name.toLowerCase().includes(searchTerm.toLowerCase()))
+              .filter((character) =>
+                character.name.toLowerCase().includes(searchTerm.toLowerCase()),
+              )
               .map((character) => (
                 <CharacterCard
                   character={character}

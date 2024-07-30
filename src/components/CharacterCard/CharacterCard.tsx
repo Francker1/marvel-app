@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Card, CharacterLink, CharacterImage, CharacterInfo, CharacterName, FavoritesIcon } from './CharacterCard.styles';
+import {
+  Card,
+  CharacterLink,
+  CharacterImage,
+  CharacterInfo,
+  CharacterName,
+  FavoritesIcon,
+} from './CharacterCard.styles';
 import HeartIconFilled from '../../assets/img/Heart-icon-filled.svg';
 import HeartIconFilledWhite from '../../assets/img/Heart-icon-white.svg';
 import HeartIconEmpty from '../../assets/img/Heart-icon-empty.svg';
@@ -11,7 +18,12 @@ interface CharacterCardProps {
   removeFavorite: (characterId: number) => void;
 }
 
-const CharacterCard: React.FC<CharacterCardProps> = ({ character, isFavorite, addFavorite, removeFavorite }) => {
+const CharacterCard: React.FC<CharacterCardProps> = ({
+  character,
+  isFavorite,
+  addFavorite,
+  removeFavorite,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
@@ -29,7 +41,10 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, isFavorite, ad
       onMouseLeave={() => setIsHovered(false)}
     >
       <CharacterLink to={`/character/${character.id}`}>
-        <CharacterImage src={`${character.thumbnail.path}.${character.thumbnail.extension}`} alt={character.name} />
+        <CharacterImage
+          src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+          alt={character.name}
+        />
       </CharacterLink>
       <CharacterInfo>
         <CharacterName>{character.name}</CharacterName>

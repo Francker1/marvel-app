@@ -25,7 +25,7 @@ const Hero = styled.div`
     width: 0;
     height: 0;
     border-left: 24px solid transparent;
-    border-bottom: 24px solid #FFFFFF;
+    border-bottom: 24px solid #ffffff;
   }
 `;
 
@@ -35,7 +35,6 @@ const Container = styled.div`
 `;
 
 const CharacterDetailPage: React.FC = () => {
-
   const [character, setCharacter] = useState<CharacterDetail | null>(null);
   const [comics, setComics] = useState<Comics[]>([]);
   const { characterId } = useParams<{ characterId: string }>();
@@ -47,7 +46,8 @@ const CharacterDetailPage: React.FC = () => {
     const loadCharacterData = async () => {
       setIsLoadingCharacter(true);
       try {
-        const characterData = await MarvelService.fetchCharacterById(characterId);
+        const characterData =
+          await MarvelService.fetchCharacterById(characterId);
         setCharacter(characterData);
       } catch (error) {
         console.error('Error fetching character:', error);
@@ -59,7 +59,8 @@ const CharacterDetailPage: React.FC = () => {
     const loadComicsData = async () => {
       setIsLoadingComics(true);
       try {
-        const comicsData = await MarvelService.fetchComicsByCharacterId(characterId);
+        const comicsData =
+          await MarvelService.fetchComicsByCharacterId(characterId);
         setComics(comicsData);
       } catch (error) {
         console.error('Error fetching comics:', error);
@@ -71,7 +72,6 @@ const CharacterDetailPage: React.FC = () => {
     loadCharacterData();
     loadComicsData();
   }, [characterId]);
-
 
   const handleFavoriteClick = () => {
     if (!character) return;
@@ -87,7 +87,11 @@ const CharacterDetailPage: React.FC = () => {
       <Header />
       <Hero>
         <Container>
-          <CharacterImageSection character={character} handleFavoriteClick={handleFavoriteClick} isLoading={isLoadingCharacter} />
+          <CharacterImageSection
+            character={character}
+            handleFavoriteClick={handleFavoriteClick}
+            isLoading={isLoadingCharacter}
+          />
         </Container>
       </Hero>
       <Container>

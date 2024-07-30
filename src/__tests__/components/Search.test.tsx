@@ -3,7 +3,9 @@ import Search from '../../components/Search/Search';
 import { expect, test, vi } from 'vitest';
 
 test('renders correctly with the given search term', () => {
-  const { asFragment } = render(<Search searchTerm="Spi" handleSearchChange={() => {}} />);
+  const { asFragment } = render(
+    <Search searchTerm="Spi" handleSearchChange={() => {}} />,
+  );
   const input = screen.getByPlaceholderText('Search a character');
   expect(input).toBeInTheDocument();
   expect(input).toHaveValue('Spi');

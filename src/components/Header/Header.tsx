@@ -6,7 +6,6 @@ import MarvelLogo from '../../assets/img/Marvel-logo.svg';
 import HeartIconFilled from '../../assets/img/Heart-icon-filled.svg';
 
 const Header: React.FC = () => {
-
   const { favorites } = useFavorites();
 
   return (

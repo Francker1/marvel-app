@@ -22,7 +22,7 @@ test('renders character card correctly', () => {
         addFavorite={() => {}}
         removeFavorite={() => {}}
       />
-    </Router>
+    </Router>,
   );
   expect(screen.getByText('Spider-Man')).toBeInTheDocument();
   expect(asFragment()).toMatchSnapshot(); // Crear snapshot
@@ -38,7 +38,7 @@ test('calls addFavorite on heart icon click when not favorite', () => {
         addFavorite={addFavorite}
         removeFavorite={() => {}}
       />
-    </Router>
+    </Router>,
   );
   const heartIcon = screen.getByAltText('Add to Favorites');
   fireEvent.click(heartIcon);
@@ -55,7 +55,7 @@ test('calls removeFavorite on heart icon click when favorite', () => {
         addFavorite={() => {}}
         removeFavorite={removeFavorite}
       />
-    </Router>
+    </Router>,
   );
   const heartIcon = screen.getByAltText('Add to Favorites');
   fireEvent.click(heartIcon);
