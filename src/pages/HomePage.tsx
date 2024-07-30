@@ -8,7 +8,6 @@ import Loader from '../components/Loader/Loader';
 import Search from '../components/Search/Search';
 import '../global.css';
 
-
 const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -48,7 +47,10 @@ const HomePage = () => {
       <Header />
       <div className="container">
         <main className="main-content">
-          <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange}/>
+          <Search
+            searchTerm={searchTerm}
+            handleSearchChange={handleSearchChange}
+          />
 
           <div className="results-count">{characters.length} RESULTS</div>
           {isLoading ? (

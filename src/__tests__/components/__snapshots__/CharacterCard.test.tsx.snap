@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders character card correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-braxZu hxZAuk"
+  >
+    <a
+      class="sc-gJhJTp hgPeRr"
+      href="/character/1"
+    >
+      <img
+        alt="Spider-Man"
+        class="sc-elDIKY cMlytH"
+        src="http://example.com/spider-man.jpg"
+      />
+    </a>
+    <div
+      class="sc-fQpRED hEHhrj"
+    >
+      <span
+        class="sc-dsLQwm lnMvxE"
+      >
+        Spider-Man
+      </span>
+      <span
+        class="sc-iKTcqh dSEPIF"
+      >
+        <img
+          alt="Add to Favorites"
+          src="/src/assets/img/Heart-icon-empty.svg"
+        />
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
