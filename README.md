@@ -1,11 +1,16 @@
 # Marvel App
 
 Este proyecto es una aplicación de React para explorar personajes de Marvel. Utiliza Vite como herramienta de construcción, TypeScript para el tipado estático y Styled Components para el estilado.
-No obstante, en ciertas partes también usa css solo para muestra de prueba técnica, para mostrar que es posible usar ambas aproximaciones para el estilado.
+No obstante, en ciertas partes también usa CSS solo para muestra de prueba técnica, para mostrar que es posible usar ambas aproximaciones para el estilado.
 
-MUY IMPORTANTE: He implementado un simulador de **cacheo de resultados**, debido a que el API de Marvel en ocasiones es lenta al obtener el resultado, bloqueando incluso el navegador. Por lo tanto, queda cacheada en el localStorage tanto el fetch de personajes, como los resultados de la búsqueda. Además, debido a la lentitud de la respuesta, he limitado a 30
+**MUY IMPORTANTE:** He implementado un simulador de **cacheo de resultados**, debido a que el API de Marvel en ocasiones es lenta al obtener el resultado, bloqueando incluso el navegador. Por lo tanto, queda cacheada en el localStorage tanto el fetch de personajes, como los resultados de la búsqueda. Además, debido al tiempo de la respuesta, he limitado los resultados a 30.
 
-Esta aplicación está desplegada en Netlify, usando una estrategia de entrega continua, la ruta es:
+El funcionamiento del cacheo de las llamadas API y consultas es el siguiente: La primera vez que carga la aplicación, se hace una llamada al API de Marvel para obtener los personajes, el método useEffect se encarga de dicha tarea y guarda el resultado en el localStorage del navegador. Por otra parte, al hacer una búsqueda, se guarda los resultados también y para futuras ocasiones, cuando el usuario escriba en el formulario de búsqueda, si coincide el texto a buscar con la key que se ha guardado en localStorage, se devolverán los resultados cacheados.
+
+
+### Despliegue en producción
+
+Esta aplicación está desplegada en Netlify, usando una estrategia de entrega continua, cada vez que se entregan cambios en la rama main. La url es:
 
 https://main--marvel-z-app.netlify.app/
 
@@ -43,11 +48,11 @@ pnpm install
 ## Arrancar el Proyecto en Local
 
 #### ENVIRONMENT VARIABLES:
-Solo para efectos de la práctica, debes crear un archivo .env en la raíz del proyecto e incluir las variables de entorno del archivo .sample.env
+Solo para efectos de la práctica, es necesario crear un archivo .env en la raíz del proyecto e incluir las variables de entorno del archivo .sample.env
 
 Debes incluir la api-key y el hash para autenticar las peticiones a API de Marvel.
 
-Una vez que hayas clonado el repositorio, navega a la carpeta del proyecto y ejecuta el siguiente comando para instalar las dependencias:
+Una vez clonado el repositorio, y las variables de entorno configuradas, navega a la carpeta del proyecto y ejecuta el siguiente comando para instalar las dependencias:
 
 ```bash
 pnpm run dev
@@ -144,6 +149,14 @@ Optar por styled-components para el estilado permite una mejor organización y e
 #### Servicios Centralizados:
 La carpeta services contiene las llamadas a la API, lo cual centraliza la lógica de comunicación con el backend y facilita la gestión de estos servicios, además de simplificar el mockeo en los tests.
 
+## Posibles mejoras
+
+Aunque me he ceñido lo máximo posible al requerimiento de la prueba técnica, una de las posibles mejoras que haría en la app sería incluir una paginación, para ello podría apoyarme en el parámetro *offset* disponible en el API.
+
+También incluiría un hook para hacer fetching de datos, si esa aplicación creciera en complejidad.
+
+He incluído tests como muestra en los componentes o funciones necesarias, pero sería interesante incluir mayor número de test, y si fuera el caso de una aplicación compleja, no solo tests unitarios sino test de integración usando Cypress o Playwright.
+
 ## Contacto
-Si tienes alguna pregunta o necesitas ayuda, por favor contacta conmigo al email italo.ravina@gmail.com
+Si tienes alguna pregunta o necesitas ayuda, por favor contacta conmigo al email italo.ravina@gmail.com.
 
