@@ -12,7 +12,7 @@ https://main--marvel-z-app.netlify.app/
 
 # Requisitos Previos
 
-1. Node.js (versión 14 o superior)
+1. Node.js (versión 18 o superior)
 2. pnpm (gestor de paquetes)
 
 ## Instalación de pnpm
